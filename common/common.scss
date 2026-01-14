@@ -84,7 +84,10 @@
 			&:before {
 				content: 'EchoRP';
 			}
-			background-image: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+
+			background-image: url('https://forum.echorp.net/uploads/default/original/1X/25436ec3ec4ea7ff7cf150db263d939ca85e169a.svg');
+			background-size: cover;
+			background-position: center;
 		}
 
 		/* Server Operations - Red gradient */
@@ -92,7 +95,10 @@
 			&:before {
 				content: 'Server Operations';
 			}
-			background-image: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+
+			background-image: url('https://forum.echorp.net/uploads/default/original/1X/6d4e5e5c0ed0e7e8797c77c467ede16142b10fd6.svg');
+			background-size: cover;
+			background-position: center;
 		}
 
 		/* Feedback - Green/Teal gradient */
@@ -100,7 +106,10 @@
 			&:before {
 				content: 'Feedback & Development';
 			}
-			background-image: linear-gradient(135deg, #134E5E 0%, #71B280 100%);
+
+			background-image: url('https://forum.echorp.net/uploads/default/original/1X/7d62f142a4a1996de008d565e32ed1cf1b33158a.svg');
+			background-size: cover;
+			background-position: center;
 		}
 
 		/* Ungrouped - Gray/Blue gradient */
@@ -166,5 +175,6 @@
 		}
 	}
 }
+
 
 
