@@ -39,12 +39,12 @@
 
 			&:before {
 				position: absolute;
-				top: 35px; /* Better positioning */
-				left: 20px; /* More padding from edge */
+				top: 60px;
+				left: 15px;
 				color: #fff;
 				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Better shadow */
-				font-size: 36px; /* Slightly smaller */
-				font-weight: 700; /* Bolder */
+				font-size: 40px; /* Slightly smaller */
+				font-weight: 500;
 				letter-spacing: -0.5px; /* Tighter spacing */
 			}
 
@@ -166,4 +166,5 @@
 		}
 	}
 }
+
 
