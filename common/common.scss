@@ -2,6 +2,7 @@
 	background-color: rgb(221, 93, 93);
 	color: #e9e9e9 !important;
 }
+
 .toggle-hide-devs-btn {
 	background-color: transparent;
 }
@@ -16,32 +17,36 @@
 }
 
 .categories-root {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-	& > div {
-		width: calc(50% - 10px);
-	}
+	display: block; /* Changed from flex */
+	max-width: 1110px;
+	margin: 0 auto;
 }
 
 .navigation-categories {
 	.category-thing {
+		margin-bottom: 2em; /* Added spacing between groups */
+		border-radius: 8px; /* Added rounded corners */
+		overflow: hidden; /* Clean edges */
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Added depth */
+
 		& > .category-list {
 			display: block;
-			padding-top: 150px;
+			padding-top: 120px; /* Reduced from 150px */
 			background-repeat: no-repeat;
-			background-size: 100% 150px;
+			background-size: 100% 120px; /* Match padding */
 			position: relative;
 			width: 100%;
+			margin: 0;
 
 			&:before {
 				position: absolute;
-				top: calc(150px - 50px - 25px);
-				left: 13px;
+				top: 35px; /* Better positioning */
+				left: 20px; /* More padding from edge */
 				color: #fff;
-				text-shadow: #000 0px 0px 4px;
-				font-size: 50px;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Better shadow */
+				font-size: 36px; /* Slightly smaller */
+				font-weight: 700; /* Bolder */
+				letter-spacing: -0.5px; /* Tighter spacing */
 			}
 
 			thead {
@@ -54,6 +59,20 @@
 				width: 100%;
 				table-layout: fixed;
 				box-sizing: border-box;
+				background: var(--secondary); /* Match discourse theme */
+			}
+
+			/* Row styling */
+			tbody tr {
+				border-bottom: 1px solid var(--primary-low);
+				
+				&:last-child {
+					border-bottom: none;
+				}
+
+				&:hover {
+					background: var(--primary-very-low);
+				}
 			}
 
 			div {
@@ -61,41 +80,44 @@
 			}
 		}
 
+		/* EchoRP - Blue gradient */
 		&.echorp > .category-list {
 			&:before {
 				content: 'EchoRP';
 			}
-
-			background-image: linear-gradient(to bottom, #1a1a1a 0%, #2d2d2d 100%);
+			background-image: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 		}
 
+		/* Server Operations - Red gradient */
 		&.operations > .category-list {
 			&:before {
 				content: 'Server Operations';
 			}
-
-			background-image: linear-gradient(to bottom, #2b2b2b 0%, #3c3c3c 100%);
+			background-image: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
 		}
 
+		/* Feedback - Green/Teal gradient */
 		&.feedback > .category-list {
 			&:before {
 				content: 'Feedback & Development';
 			}
-
-			background-image: linear-gradient(to bottom, #3c3c3c 0%, #4d4d4d 100%);
+			background-image: linear-gradient(135deg, #134E5E 0%, #71B280 100%);
 		}
 
+		/* Ungrouped - Gray/Blue gradient */
 		&.other > .category-list {
 			&:before {
 				content: 'Ungrouped Content';
 			}
-
-			background-image: linear-gradient(
-				to bottom,
-				rgb(117, 117, 117) 0%,
-				rgb(0, 0, 0) 100%
-			);
+			background-image: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
 		}
+	}
+}
+
+/* Category title styling */
+.category-list-item {
+	.category-text-title {
+		font-weight: 600;
 	}
 }
 
@@ -113,29 +135,35 @@
 	}
 }
 
-/* Migrated from mobile/mobile.scss */
+/* Mobile responsive styles */
 @media screen and (max-width: 768px) {
 	.navigation-categories {
 		.category-thing {
 			margin-left: -10px;
 			margin-right: -10px;
 			width: calc(100% + 20px);
+			border-radius: 0; /* No rounded corners on mobile */
 
 			& > .category-list {
 				padding-left: 10px;
-				/*padding-right: 10px;*/
-			}
-
-			&.core > .category-list {
-				display: block;
-				padding-top: 0px;
-				background-size: 0px 0px;
+				padding-top: 100px; /* Smaller on mobile */
+				background-size: 100% 100px;
 
 				&:before {
-					content: '';
+					font-size: 28px; /* Smaller text on mobile */
+					top: 30px;
+				}
+			}
+
+			/* Hide first banner on mobile if needed */
+			&.echorp > .category-list {
+				padding-top: 100px;
+				background-size: 100% 100px;
+
+				&:before {
+					/* Keep banner visible on mobile */
 				}
 			}
 		}
 	}
 }
-
