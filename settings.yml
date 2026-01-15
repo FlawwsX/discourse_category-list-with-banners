@@ -2,3 +2,8 @@ group_slug_mapping:
   type: list
   default: 'core;bacta|togr;togr|apps-appeals;["app", "appeal"]|dev;dev|private;["staff", "forums-staff"]|closed;["scp", "interstate"]'
   description: 'Group key; slug prefix or list of prefixes. Format: group;prefix or group;["prefix1", "prefix2"]'
+
+auto_title_categories:
+  type: list
+  default: 'player-reports;Player Report|support-tickets;Support Ticket|bug-reports;Bug Report'
+  description: 'Auto-generate titles for these categories. Format: category-slug;Title Prefix'
