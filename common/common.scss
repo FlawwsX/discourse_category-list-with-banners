@@ -10,14 +10,14 @@ body {
 body::before {
 	content: '';
 	position: fixed;
-	width: 800px;
-	height: 500px;
-	top: -200px;
+	width: 1000px;
+	height: 600px;
+	top: -150px;
 	left: 50%;
 	transform: translateX(-50%);
-	background: radial-gradient(ellipse, rgba(0, 212, 255, 0.2) 0%, rgba(99, 102, 241, 0.1) 40%, transparent 70%);
+	background: radial-gradient(ellipse, rgba(0, 212, 255, 0.35) 0%, rgba(99, 102, 241, 0.2) 40%, transparent 70%);
 	border-radius: 50%;
-	filter: blur(80px);
+	filter: blur(60px);
 	z-index: -1;
 	pointer-events: none;
 	animation: glowPulse 8s ease-in-out infinite, glowDrift 12s ease-in-out infinite;
@@ -25,22 +25,59 @@ body::before {
 
 @keyframes glowPulse {
 	0%, 100% {
-		opacity: 0.6;
+		opacity: 0.8;
 		transform: translateX(-50%) scale(1);
 	}
 	50% {
 		opacity: 1;
-		transform: translateX(-50%) scale(1.1);
+		transform: translateX(-50%) scale(1.15);
 	}
 }
 
 @keyframes glowDrift {
 	0%, 100% {
-		filter: blur(80px) hue-rotate(0deg);
+		filter: blur(60px) hue-rotate(0deg);
 	}
 	50% {
-		filter: blur(100px) hue-rotate(20deg);
+		filter: blur(80px) hue-rotate(30deg);
 	}
+}
+
+/* ==========================================
+   CUSTOM SCROLLBAR
+   ========================================== */
+
+/* Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 212, 255, 0.5) rgba(30, 34, 42, 0.3);
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(30, 34, 42, 0.3);
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(180deg, rgba(0, 212, 255, 0.6) 0%, rgba(99, 102, 241, 0.6) 100%);
+	border-radius: 5px;
+	border: 2px solid transparent;
+	background-clip: padding-box;
+	transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(180deg, rgba(0, 212, 255, 0.9) 0%, rgba(99, 102, 241, 0.9) 100%);
+}
+
+::-webkit-scrollbar-corner {
+	background: rgba(30, 34, 42, 0.3);
 }
 
 /* ==========================================
@@ -269,8 +306,8 @@ body::before {
 	}
 
 	body::before {
-		width: 400px;
-		height: 300px;
+		width: 500px;
+		height: 400px;
 		top: -100px;
 	}
 
