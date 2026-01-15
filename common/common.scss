@@ -2,12 +2,13 @@
    FUTURISTIC BACKGROUND GLOW
    ========================================== */
 
-body {
+html {
 	position: relative;
 	min-height: 100vh;
+	overflow-x: hidden;
 }
 
-body::before {
+html::before {
 	content: '';
 	position: fixed;
 	width: 1000px;
@@ -18,9 +19,14 @@ body::before {
 	background: radial-gradient(ellipse, rgba(0, 212, 255, 0.35) 0%, rgba(99, 102, 241, 0.2) 40%, transparent 70%);
 	border-radius: 50%;
 	filter: blur(60px);
-	z-index: -1;
+	z-index: 0;
 	pointer-events: none;
 	animation: glowPulse 8s ease-in-out infinite, glowDrift 12s ease-in-out infinite;
+}
+
+body {
+	position: relative;
+	z-index: 1;
 }
 
 @keyframes glowPulse {
@@ -297,12 +303,6 @@ body::before {
 	}
 }
 
-#main-outlet {
-  .mobile-view & {
-    padding-top: 100px!important; // notch avoidance
-  }
-}
-
 /* Mobile responsive styles */
 @media screen and (max-width: 768px) {
 	.categories-root {
@@ -311,10 +311,14 @@ body::before {
 		padding: 0;
 	}
 
-	body::before {
+	html::before {
 		width: 500px;
 		height: 400px;
 		top: -100px;
+	}
+
+	#main-outlet {
+		padding-top: 90px;
 	}
 
 	.navigation-categories {
