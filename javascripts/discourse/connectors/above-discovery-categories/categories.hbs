@@ -1,10 +1,9 @@
-{{#if (eq this.router.currentRouteName "discovery.categories")}}
-  <div class="categories-root">
-    <div class="navigation-categories">
-      <div class="category-thing echorp"></div>
-      <div class="category-thing operations"></div>
-      <div class="category-thing feedback"></div>
-      <div class="category-thing other"></div>
-    </div>
-  </div>
-{{/if}}
+<div class="category-thing echorp"></div>
+<div class="category-thing operations"></div>
+<div class="category-thing feedback"></div>
+<div class='category-thing other'></div>
+
+<CategorySorter
+	@categories={{@outletArgs.categories}}
+	@mapping={{theme-setting 'group_slug_mapping'}}
+/>
