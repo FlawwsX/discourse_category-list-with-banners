@@ -17,22 +17,22 @@
 }
 
 .categories-root {
-	display: block; /* Changed from flex */
+	display: block;
 	max-width: 1110px;
 	margin: 0 auto;
 }
 
 .navigation-categories {
 	.category-thing {
-		margin-bottom: 2em; /* Added spacing between groups */
-		overflow: hidden; /* Clean edges */
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Added depth */
+		margin-bottom: 2em;
+		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
 		& > .category-list {
 			display: block;
-			padding-top: 120px; /* Reduced from 150px */
+			padding-top: 120px;
 			background-repeat: no-repeat;
-			background-size: 100% 120px; /* Match padding */
+			background-size: 100% 120px;
 			position: relative;
 			width: 100%;
 			margin: 0;
@@ -42,10 +42,10 @@
 				top: 60px;
 				left: 15px;
 				color: #fff;
-				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Better shadow */
-				font-size: 40px; /* Slightly smaller */
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+				font-size: 40px;
 				font-weight: 500;
-				letter-spacing: -0.5px; /* Tighter spacing */
+				letter-spacing: -0.5px;
 			}
 
 			thead {
@@ -58,7 +58,7 @@
 				width: 100%;
 				table-layout: fixed;
 				box-sizing: border-box;
-				background: var(--secondary); /* Match discourse theme */
+				background: var(--secondary);
 			}
 
 			/* Row styling */
@@ -79,8 +79,42 @@
 			}
 		}
 
+		/* Mobile category list (div-based) */
+		& > .mobile-category-list {
+			display: block;
+			padding-top: 80px;
+			background-repeat: no-repeat;
+			background-size: 100% 80px;
+			position: relative;
+			width: 100%;
+			margin: 0;
+			background-color: var(--secondary);
+
+			&:before {
+				position: absolute;
+				top: 25px;
+				left: 15px;
+				color: #fff;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+				font-size: 24px;
+				font-weight: 700;
+				letter-spacing: -0.5px;
+			}
+
+			/* Style the category items inside */
+			[data-category-id] {
+				border-bottom: 1px solid var(--primary-low);
+				padding: 0.75em 0.5em;
+				
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+
 		/* EchoRP - Blue gradient */
-		&.echorp > .category-list {
+		&.echorp > .category-list,
+		&.echorp > .mobile-category-list {
 			&:before {
 				content: 'EchoRP';
 			}
@@ -89,7 +123,8 @@
 		}
 
 		/* Server Operations - Red gradient */
-		&.operations > .category-list {
+		&.operations > .category-list,
+		&.operations > .mobile-category-list {
 			&:before {
 				content: 'Server Operations';
 			}
@@ -98,7 +133,8 @@
 		}
 
 		/* Feedback - Green/Teal gradient */
-		&.feedback > .category-list {
+		&.feedback > .category-list,
+		&.feedback > .mobile-category-list {
 			&:before {
 				content: 'Feedback & Development';
 			}
@@ -107,7 +143,8 @@
 		}
 
 		/* Ungrouped - Gray/Blue gradient */
-		&.other > .category-list {
+		&.other > .category-list,
+		&.other > .mobile-category-list {
 			&:before {
 				content: 'Ungrouped Content';
 			}
@@ -147,44 +184,58 @@
 
 	.navigation-categories {
 		.category-thing {
-			margin: 0 0 1.5em 0; /* Just bottom margin */
+			margin: 0 0 1.5em 0;
 			width: 100%;
-			border-radius: 0; /* No rounded corners on mobile */
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+			border-radius: 0;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
 			& > .category-list {
-				padding-left: 0; /* Remove left padding */
-				padding-top: 80px; /* Smaller banner on mobile */
+				padding-left: 0;
+				padding-top: 80px;
 				background-size: 100% 80px;
 				margin: 0;
 
 				&:before {
-					font-size: 24px; /* Smaller text on mobile */
+					font-size: 24px;
 					top: 25px;
 					left: 15px;
 					font-weight: 700;
 				}
 
-				/* Mobile row styling */
 				tbody tr {
 					td {
-						padding: 0.75em 0.5em; /* Tighter padding */
+						padding: 0.75em 0.5em;
 					}
+				}
+			}
+
+			& > .mobile-category-list {
+				padding-top: 80px;
+				background-size: 100% 80px;
+
+				&:before {
+					font-size: 24px;
+					top: 25px;
+					left: 15px;
+					font-weight: 700;
 				}
 			}
 		}
 	}
 
-	/* Ensure all banners show on mobile */
+	/* Ensure banners show on mobile for both table and div lists */
 	.category-thing.echorp > .category-list,
+	.category-thing.echorp > .mobile-category-list,
 	.category-thing.operations > .category-list,
+	.category-thing.operations > .mobile-category-list,
 	.category-thing.feedback > .category-list,
-	.category-thing.other > .category-list {
+	.category-thing.feedback > .mobile-category-list,
+	.category-thing.other > .category-list,
+	.category-thing.other > .mobile-category-list {
 		padding-top: 80px !important;
 		background-size: 100% 80px !important;
 
 		&:before {
-			content: attr(data-group) !important; /* This will be set by CSS */
 			display: block !important;
 		}
 	}
@@ -194,8 +245,9 @@
 @media screen and (max-width: 480px) {
 	.navigation-categories {
 		.category-thing {
-			& > .category-list {
-				padding-top: 60px; /* Even smaller */
+			& > .category-list,
+			& > .mobile-category-list {
+				padding-top: 60px;
 				background-size: 100% 60px;
 
 				&:before {
