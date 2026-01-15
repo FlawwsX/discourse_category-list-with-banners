@@ -297,6 +297,12 @@ body::before {
 	}
 }
 
+#main-outlet {
+  .mobile-view & {
+    padding-top: var(--space-12)!important; // notch avoidance
+  }
+}
+
 /* Mobile responsive styles */
 @media screen and (max-width: 768px) {
 	.categories-root {
@@ -309,10 +315,6 @@ body::before {
 		width: 500px;
 		height: 400px;
 		top: -100px;
-	}
-
-	#main-outlet {
-		padding-top: 120px;
 	}
 
 	.navigation-categories {
