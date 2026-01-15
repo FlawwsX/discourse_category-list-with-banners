@@ -8,13 +8,13 @@ export default class CategorySorter extends Component {
 	constructor() {
 		super(...arguments);
 
-		// Run initially with a longer delay to ensure DOM is ready
-		setTimeout(() => this.sortAndInject(), 200);
+		// Run initially
+		setTimeout(() => this.sortAndInject(), 50);
 
 		// Run on every route change to categories
 		this.router.on('routeDidChange', () => {
 			if (this.router.currentRouteName === 'discovery.categories') {
-				setTimeout(() => this.sortAndInject(), 200);
+				setTimeout(() => this.sortAndInject(), 50);
 			}
 		});
 	}
@@ -45,39 +45,38 @@ export default class CategorySorter extends Component {
 			groupMapping[group.trim()] = rule;
 		});
 
-		// 🔍 Try multiple selectors to find the category table
-		let originalTable = null;
-		
-		// Try 1: Look for table with class "category-list with-topics"
-		originalTable = document.querySelector('table.category-list.with-topics');
-		
-		// Try 2: Look for any table inside main content area
-		if (!originalTable) {
-			originalTable = document.querySelector('.container.list-container table');
-		}
-		
-		// Try 3: Look for category-list class
-		if (!originalTable) {
-			originalTable = document.querySelector('table.category-list');
-		}
+		// 🔍 Find the wrapper dynamically based on first child being a category table
+		const candidates = document.querySelectorAll('div.ember-view');
+		let originalWrapper = null;
+		candidates.forEach((wrapper) => {
+			const firstChild = wrapper.firstElementChild;
+			if (
+				firstChild &&
+				firstChild.tagName === 'TABLE' &&
+				firstChild.classList.contains('category-list') &&
+				firstChild.classList.contains('with-topics')
+			) {
+				originalWrapper = wrapper;
+			}
+		});
 
-		if (!originalTable) {
-			console.warn('❌ Could not find the category table. Available tables:', 
-				document.querySelectorAll('table'));
+		if (!originalWrapper) {
+			console.warn('❌ Could not find the category table wrapper.');
 			return;
 		}
 
-		console.log('✅ Found category table:', originalTable);
-
-		// Get all category rows
-		const originalRows = originalTable.querySelectorAll('tbody tr[data-category-id]');
-		
-		if (originalRows.length === 0) {
-			console.warn('❌ No category rows found');
+		const originalTable = originalWrapper.querySelector(
+			'table.category-list.with-topics'
+		);
+		if (!originalTable) {
+			console.warn('❌ Table not found inside wrapper.');
 			return;
 		}
 
-		console.log('✅ Found', originalRows.length, 'category rows');
+		// ✅ Use the correct reference here
+		const originalRows = originalTable.querySelectorAll(
+			'tbody tr[data-category-id]'
+		);
 
 		const rowMap = new Map();
 		originalRows.forEach((row) => {
@@ -85,14 +84,12 @@ export default class CategorySorter extends Component {
 			rowMap.set(id, row);
 		});
 
-		// Create containers for each group
 		const containers = {};
 		Object.keys(groupMapping).forEach((group) => {
 			containers[group] = this.createTable(group);
 		});
 		containers.other = this.createTable('other');
 
-		// Sort categories into groups
 		categories.forEach((category) => {
 			const slug = category.slug;
 			const row = rowMap.get(category.id);
@@ -108,52 +105,23 @@ export default class CategorySorter extends Component {
 				}
 			}
 
-			console.log('📌 Category:', slug, '→ Group:', matchedGroup);
 			containers[matchedGroup].tbody.appendChild(row);
 		});
 
-		// Append containers to the navigation-categories div
-		const navigationCategories = document.querySelector('.navigation-categories');
-		if (!navigationCategories) {
-			console.error('❌ Could not find .navigation-categories');
-			return;
-		}
-
-		// Clear existing content
-		navigationCategories.innerHTML = '';
-		
-		// Append each group's container if it has categories
-		for (const [groupKey, { container, table }] of Object.entries(containers)) {
+		for (const { container, table } of Object.values(containers)) {
 			if (table.querySelector('tbody').children.length > 0) {
-				console.log('✅ Appending group:', groupKey, 'with', table.querySelector('tbody').children.length, 'categories');
-				
-				// Make sure container has the category-thing class
-				if (!container.classList.contains('category-thing')) {
-					container.classList.add('category-thing', groupKey);
-				}
-				
 				container.appendChild(table);
-				navigationCategories.appendChild(container);
 			}
 		}
 
-		// Hide the original table
-		const originalWrapper = originalTable.closest('.ember-view');
-		if (originalWrapper && originalWrapper !== navigationCategories) {
-			originalWrapper.style.display = 'none';
-		}
-
-		console.log('✅ Category grouping complete!');
+		// ✅ Safely remove the original wrapper
+		originalWrapper.remove();
 	}
 
 	createTable(groupKey) {
-		// Check if container already exists
-		let container = document.querySelector(`.category-thing.${groupKey}`);
-		
+		const container = document.querySelector(`.category-thing.${groupKey}`);
 		if (!container) {
-			console.warn(`⚠️ Creating new container for group: ${groupKey}`);
-			container = document.createElement('div');
-			container.className = `category-thing ${groupKey}`;
+			console.warn(`⚠️ No container found for group: ${groupKey}`);
 		}
 
 		const table = document.createElement('table');
@@ -176,7 +144,14 @@ export default class CategorySorter extends Component {
 		return {
 			table,
 			tbody: table.querySelector('tbody'),
-			container: container,
+			container: container || this.createFallbackDiv(groupKey),
 		};
+	}
+
+	createFallbackDiv(groupKey) {
+		const fallback = document.createElement('div');
+		fallback.className = `category-thing ${groupKey}`;
+		document.body.appendChild(fallback);
+		return fallback;
 	}
 }
