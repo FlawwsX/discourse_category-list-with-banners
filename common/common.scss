@@ -28,7 +28,8 @@
 		overflow: hidden;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
-		& > .category-list {
+		/* Desktop table-based category list */
+		& > table.category-list {
 			display: block;
 			padding-top: 120px;
 			background-repeat: no-repeat;
@@ -78,12 +79,42 @@
 			}
 		}
 
+		/* Mobile div-based category list */
+		& > div.category-list.mobile-grouped {
+			display: block;
+			padding-top: 80px;
+			background-repeat: no-repeat;
+			background-size: 100% 80px;
+			position: relative;
+			width: 100%;
+			margin: 0;
+			background-color: var(--secondary);
+
+			&:before {
+				position: absolute;
+				top: 25px;
+				left: 15px;
+				color: #fff;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+				font-size: 24px;
+				font-weight: 700;
+				letter-spacing: -0.5px;
+			}
+
+			.category-list-item {
+				border-bottom: 1px solid var(--primary-low);
+
+				&:last-child {
+					border-bottom: none;
+				}
+			}
+		}
+
 		/* EchoRP - Blue gradient */
 		&.echorp > .category-list {
 			&:before {
 				content: 'EchoRP';
 			}
-
 			background-image: url('https://forum.echorp.net/uploads/default/original/1X/d6e6f943f73331fff505af00dd7eaf182b3b7f93.jpeg');
 		}
 
@@ -92,7 +123,6 @@
 			&:before {
 				content: 'Server Operations';
 			}
-
 			background-image: url('https://forum.echorp.net/uploads/default/original/1X/59655485361a2fb165fef5939de67363d1ac91ce.jpeg');
 		}
 
@@ -101,7 +131,6 @@
 			&:before {
 				content: 'Feedback & Development';
 			}
-
 			background-image: url('https://forum.echorp.net/uploads/default/original/1X/8f3999891eca6b71a4a5dcad3a732ba29c8dcf7e.jpeg');
 		}
 
@@ -151,7 +180,7 @@
 			border-radius: 0;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-			& > .category-list {
+			& > table.category-list {
 				padding-left: 0;
 				padding-top: 80px;
 				background-size: 100% 80px;
@@ -164,24 +193,22 @@
 					font-weight: 700;
 				}
 
-				tbody tr {
-					td {
-						padding: 0.75em 0.5em;
-					}
+				tbody tr td {
+					padding: 0.75em 0.5em;
 				}
 			}
-		}
-	}
 
-	.category-thing.echorp > .category-list,
-	.category-thing.operations > .category-list,
-	.category-thing.feedback > .category-list,
-	.category-thing.other > .category-list {
-		padding-top: 80px !important;
-		background-size: 100% 80px !important;
+			& > div.category-list.mobile-grouped {
+				padding-top: 80px;
+				background-size: 100% 80px;
 
-		&:before {
-			display: block !important;
+				&:before {
+					font-size: 24px;
+					top: 25px;
+					left: 15px;
+					font-weight: 700;
+				}
+			}
 		}
 	}
 }
@@ -190,7 +217,8 @@
 @media screen and (max-width: 480px) {
 	.navigation-categories {
 		.category-thing {
-			& > .category-list {
+			& > table.category-list,
+			& > div.category-list.mobile-grouped {
 				padding-top: 60px;
 				background-size: 100% 60px;
 
