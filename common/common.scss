@@ -299,7 +299,7 @@ body::before {
 
 #main-outlet {
   .mobile-view & {
-    padding-top: var(--space-12)!important; // notch avoidance
+    padding-top: 100px!important; // notch avoidance
   }
 }
 
