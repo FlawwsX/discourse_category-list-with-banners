@@ -61,7 +61,6 @@
 				background: var(--secondary);
 			}
 
-			/* Row styling */
 			tbody tr {
 				border-bottom: 1px solid var(--primary-low);
 				
@@ -79,42 +78,8 @@
 			}
 		}
 
-		/* Mobile category list (div-based) */
-		& > .mobile-category-list {
-			display: block;
-			padding-top: 80px;
-			background-repeat: no-repeat;
-			background-size: 100% 80px;
-			position: relative;
-			width: 100%;
-			margin: 0;
-			background-color: var(--secondary);
-
-			&:before {
-				position: absolute;
-				top: 25px;
-				left: 15px;
-				color: #fff;
-				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-				font-size: 24px;
-				font-weight: 700;
-				letter-spacing: -0.5px;
-			}
-
-			/* Style the category items inside */
-			[data-category-id] {
-				border-bottom: 1px solid var(--primary-low);
-				padding: 0.75em 0.5em;
-				
-				&:last-child {
-					border-bottom: none;
-				}
-			}
-		}
-
 		/* EchoRP - Blue gradient */
-		&.echorp > .category-list,
-		&.echorp > .mobile-category-list {
+		&.echorp > .category-list {
 			&:before {
 				content: 'EchoRP';
 			}
@@ -123,8 +88,7 @@
 		}
 
 		/* Server Operations - Red gradient */
-		&.operations > .category-list,
-		&.operations > .mobile-category-list {
+		&.operations > .category-list {
 			&:before {
 				content: 'Server Operations';
 			}
@@ -133,8 +97,7 @@
 		}
 
 		/* Feedback - Green/Teal gradient */
-		&.feedback > .category-list,
-		&.feedback > .mobile-category-list {
+		&.feedback > .category-list {
 			&:before {
 				content: 'Feedback & Development';
 			}
@@ -143,8 +106,7 @@
 		}
 
 		/* Ungrouped - Gray/Blue gradient */
-		&.other > .category-list,
-		&.other > .mobile-category-list {
+		&.other > .category-list {
 			&:before {
 				content: 'Ungrouped Content';
 			}
@@ -208,30 +170,13 @@
 					}
 				}
 			}
-
-			& > .mobile-category-list {
-				padding-top: 80px;
-				background-size: 100% 80px;
-
-				&:before {
-					font-size: 24px;
-					top: 25px;
-					left: 15px;
-					font-weight: 700;
-				}
-			}
 		}
 	}
 
-	/* Ensure banners show on mobile for both table and div lists */
 	.category-thing.echorp > .category-list,
-	.category-thing.echorp > .mobile-category-list,
 	.category-thing.operations > .category-list,
-	.category-thing.operations > .mobile-category-list,
 	.category-thing.feedback > .category-list,
-	.category-thing.feedback > .mobile-category-list,
-	.category-thing.other > .category-list,
-	.category-thing.other > .mobile-category-list {
+	.category-thing.other > .category-list {
 		padding-top: 80px !important;
 		background-size: 100% 80px !important;
 
@@ -245,8 +190,7 @@
 @media screen and (max-width: 480px) {
 	.navigation-categories {
 		.category-thing {
-			& > .category-list,
-			& > .mobile-category-list {
+			& > .category-list {
 				padding-top: 60px;
 				background-size: 100% 60px;
 
