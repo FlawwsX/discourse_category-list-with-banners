@@ -139,38 +139,71 @@
 
 /* Mobile responsive styles */
 @media screen and (max-width: 768px) {
+	.categories-root {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+
 	.navigation-categories {
 		.category-thing {
-			margin-left: -10px;
-			margin-right: -10px;
-			width: calc(100% + 20px);
+			margin: 0 0 1.5em 0; /* Just bottom margin */
+			width: 100%;
 			border-radius: 0; /* No rounded corners on mobile */
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Lighter shadow */
 
 			& > .category-list {
-				padding-left: 10px;
-				padding-top: 100px; /* Smaller on mobile */
-				background-size: 100% 100px;
+				padding-left: 0; /* Remove left padding */
+				padding-top: 80px; /* Smaller banner on mobile */
+				background-size: 100% 80px;
+				margin: 0;
 
 				&:before {
-					font-size: 28px; /* Smaller text on mobile */
-					top: 30px;
+					font-size: 24px; /* Smaller text on mobile */
+					top: 25px;
+					left: 15px;
+					font-weight: 700;
+				}
+
+				/* Mobile row styling */
+				tbody tr {
+					td {
+						padding: 0.75em 0.5em; /* Tighter padding */
+					}
 				}
 			}
+		}
+	}
 
-			/* Hide first banner on mobile if needed */
-			&.echorp > .category-list {
-				padding-top: 100px;
-				background-size: 100% 100px;
+	/* Ensure all banners show on mobile */
+	.category-thing.echorp > .category-list,
+	.category-thing.operations > .category-list,
+	.category-thing.feedback > .category-list,
+	.category-thing.other > .category-list {
+		padding-top: 80px !important;
+		background-size: 100% 80px !important;
+
+		&:before {
+			content: attr(data-group) !important; /* This will be set by CSS */
+			display: block !important;
+		}
+	}
+}
+
+/* Extra small screens (phones in portrait) */
+@media screen and (max-width: 480px) {
+	.navigation-categories {
+		.category-thing {
+			& > .category-list {
+				padding-top: 60px; /* Even smaller */
+				background-size: 100% 60px;
 
 				&:before {
-					/* Keep banner visible on mobile */
+					font-size: 20px;
+					top: 18px;
+					left: 12px;
 				}
 			}
 		}
 	}
 }
-
-
-
-
-
