@@ -44,6 +44,52 @@ body::before {
 }
 
 /* ==========================================
+   GLASSMORPHISM HEADER
+   ========================================== */
+
+.d-header-wrap {
+	position: fixed !important;
+	width: 100%;
+	z-index: 1000;
+}
+
+.d-header {
+	background: rgba(30, 34, 42, 0.7) !important;
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+
+	&:hover {
+		background: rgba(30, 34, 42, 0.85) !important;
+	}
+}
+
+/* Add padding to body so content doesn't hide under fixed header */
+#main-outlet {
+	padding-top: 30px;
+}
+
+/* Header icons/buttons subtle glow on hover */
+.d-header .icons .icon {
+	transition: all 0.2s ease;
+	border-radius: 8px;
+
+	&:hover {
+		background: rgba(0, 212, 255, 0.1);
+	}
+}
+
+.d-header .header-buttons .btn {
+	transition: all 0.2s ease;
+
+	&:hover {
+		box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+	}
+}
+
+/* ==========================================
    EXISTING STYLES
    ========================================== */
 
@@ -226,6 +272,10 @@ body::before {
 		width: 400px;
 		height: 300px;
 		top: -100px;
+	}
+
+	#main-outlet {
+		padding-top: 20px;
 	}
 
 	.navigation-categories {
